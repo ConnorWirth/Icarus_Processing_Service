@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Icarus_Processing_Service
 {
+    /*
+    6.1	Create a separate class file to hold the data items of the Drone. Use separate getter and setter methods, 
+    ensure the attributes are private and the accessor methods are public. Add a display method that returns a 
+    string for Client Name and Service Cost. Add suitable code to the Client Name and Service Problem accessor 
+    methods so the data is formatted as Title case or Sentence case. Save the class as “Drone.cs”.
+    */
     public class Drone
     {
         // Private attributes
         private string clientName;
         private string droneModel;
         private string serviceProblem;
-        private float serviceCost;
+        private double serviceCost;
         private int serviceTag;
 
         // Public getters and setters for clientName
@@ -23,7 +30,7 @@ namespace Icarus_Processing_Service
 
         public void SetClientName(string ClientName)
         {
-            ClientName = clientName;
+            clientName = ClientName;
         }
 
         // Public getters and setters for droneModel
@@ -34,7 +41,7 @@ namespace Icarus_Processing_Service
 
         public void SetDroneModel(string DroneModel)
         {
-            DroneModel = droneModel;
+            droneModel = DroneModel;
         }
 
         // Public getters and setters for serviceProblem
@@ -45,18 +52,18 @@ namespace Icarus_Processing_Service
 
         public void SetServiceProblem(string ServiceProblem)
         {
-            ServiceProblem = serviceProblem;
+            serviceProblem = ServiceProblem;
         }
 
         // Public getters and setters for serviceCost
-        public float GetServiceCost()
+        public double GetServiceCost()
         {
             return serviceCost;
         }
 
-        public void SetServiceCost(float ServiceCost)
+        public void SetServiceCost(double ServiceCost)
         {
-            ServiceCost = serviceCost;
+            serviceCost = ServiceCost;
         }
 
         // Public getters and setters for serviceTag
@@ -67,8 +74,41 @@ namespace Icarus_Processing_Service
 
         public void SetServiceTag(int ServiceTag)
         {
-            ServiceTag = serviceTag;
+            serviceTag = ServiceTag;
         }
-    }
 
+        public string Display()
+        {
+            return $"Client Name: {clientName}\nService Cost: {serviceCost:C}\nService Problem: {serviceProblem}";
+        }
+
+        private string FormatClientName(string name)
+        {
+            // Format the client name as Title Case
+            if (!string.IsNullOrEmpty(name))
+            {
+                string[] words = name.Split(' ');
+                for (int i = 0; i < words.Length; i++)
+                {
+                    if (!string.IsNullOrEmpty(words[i]))
+                    {
+                        words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+                    }
+                }
+                return string.Join(" ", words);
+            }
+            return name;
+        }
+
+        public Drone(string name, string drone, string problem, double cost)
+        {
+            // Assign the provided values to the corresponding fields of the Information object.
+            this.clientName = name;
+            this.droneModel = drone;
+            this.serviceProblem = problem;
+            this.serviceCost = cost;
+        }
+
+        public Drone() { }
+    }
 }

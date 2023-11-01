@@ -4,9 +4,57 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Icarus_Processing_Service"
+        xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="Icarus Processing Service" Height="520" Width="730" ResizeMode="CanMinimize">
+    <Grid RenderTransformOrigin="0.442,0.477">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="379*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="90,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" x:Name="textBoxDrone" FontSize="10" Height="20"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="90,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" x:Name="textBoxClient" FontSize="10" Height="20"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="90,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" x:Name="textBoxCost" FontSize="10" Height="20"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="90,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" x:Name="textBoxProblem" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" FontSize="10" Height="40"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,27,0,0" TextWrapping="Wrap" Text="Drone Model" VerticalAlignment="Top" FontSize="10"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,58,0,0" TextWrapping="Wrap" Text="Client Name" VerticalAlignment="Top" FontSize="10"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,88,0,0" TextWrapping="Wrap" Text="Service Cost" VerticalAlignment="Top" FontSize="10"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,128,0,0" TextWrapping="Wrap" Text="Service Problem" VerticalAlignment="Top" FontSize="10"/>
+        <RadioButton Grid.Column="1" Content="Regular Service" HorizontalAlignment="Left" Margin="95,171,0,0" VerticalAlignment="Top" FontSize="10" x:Name="radioButtonRegular"/>
+        <RadioButton Grid.Column="1" Content="Express Service" HorizontalAlignment="Left" Margin="195,171,0,0" VerticalAlignment="Top" FontSize="10" x:Name="radioButtonExpress"/>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="90,165,0,0" Stroke="Black" VerticalAlignment="Top" Width="200" Opacity="0.2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,170,0,0" TextWrapping="Wrap" Text="Service Priority" VerticalAlignment="Top" FontSize="10"/>
+        <wpfx:IntegerUpDown x:Name="idTag" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,200,0,0" Height="20" Width="75" Grid.Column="1" Value="100" Increment="10" AllowTextInput="False" FontSize="10" Minimum="100" Maximum="900"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,203,0,0" TextWrapping="Wrap" Text="Service Tag" VerticalAlignment="Top" FontSize="10"/>
+        <Button Grid.Column="1" Content="Add Service Item" HorizontalAlignment="Left" Margin="90,240,0,0" VerticalAlignment="Top" Width="150" Height="20" FontSize="10" x:Name="buttonAdd" Click="buttonAdd_Click"/>
+        <StatusBar Margin="0,464,0,0" Grid.ColumnSpan="2" Height="20" x:Name="statusStrip1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="30,287,0,0" TextWrapping="Wrap" Text="Finished Services" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="3"/>
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,305,0,0" FontSize="10" Height="130" Width="290" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" x:Name="listBoxServices"/>
+        <ListView Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="355,43,0,0" Width="300" x:Name="listViewRegular" Height="140" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Model" DisplayMemberBinding="{Binding regularModel}" Width="58"/>
+                    <GridViewColumn Header="Client" DisplayMemberBinding="{Binding regularClient}" Width="58"/>
+                    <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding regularCost}" Width="58"/>
+                    <GridViewColumn Header="Problem" DisplayMemberBinding="{Binding regularProblem}" Width="58"/>
+                    <GridViewColumn Header="Tag" DisplayMemberBinding="{Binding regularTag}" Width="58"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="355,257,0,0" Width="300" x:Name="listViewExpress" Height="140" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Model" DisplayMemberBinding="{Binding expressModel}" Width="58"/>
+                    <GridViewColumn Header="Client" DisplayMemberBinding="{Binding expressClient}" Width="58"/>
+                    <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding expressCost}" Width="58"/>
+                    <GridViewColumn Header="Problem" DisplayMemberBinding="{Binding expressProblem}" Width="58"/>
+                    <GridViewColumn Header="Tag" DisplayMemberBinding="{Binding expressTag}" Width="58"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock HorizontalAlignment="Left" Margin="355,25,0,0" TextWrapping="Wrap" Text="Regular Services" VerticalAlignment="Top" FontSize="10" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="355,239,0,0" TextWrapping="Wrap" Text="Express Services" VerticalAlignment="Top" FontSize="10" Grid.Column="1"/>
+        <Button Grid.Column="1" Content="Remove Service Item" HorizontalAlignment="Left" Margin="430,200,0,0" VerticalAlignment="Top" Width="150" Height="20" FontSize="10" x:Name="buttonRemoveRegular"/>
+        <Button Grid.Column="1" Content="Remove Service Item" HorizontalAlignment="Left" Margin="430,415,0,0" VerticalAlignment="Top" Width="150" Height="20" FontSize="10" x:Name="buttonRemoveExpress"/>
     </Grid>
 </Window>

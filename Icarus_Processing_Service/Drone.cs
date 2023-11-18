@@ -30,7 +30,7 @@ namespace Icarus_Processing_Service
 
         public void SetClientName(string ClientName)
         {
-            clientName = ClientName;
+            clientName = FormatClientName(ClientName);
         }
 
         // Public getters and setters for droneModel
@@ -52,7 +52,7 @@ namespace Icarus_Processing_Service
 
         public void SetServiceProblem(string ServiceProblem)
         {
-            serviceProblem = ServiceProblem;
+            serviceProblem = FormatClientName(ServiceProblem);
         }
 
         // Public getters and setters for serviceCost
@@ -77,30 +77,37 @@ namespace Icarus_Processing_Service
             serviceTag = ServiceTag;
         }
 
+        // Display of data that has been dequeued from listview and moved into listbox
         public string Display()
         {
             return $"Client Name: {clientName}\nService Cost: {serviceCost:C}\nService Problem: {serviceProblem}";
         }
 
-        private string FormatClientName(string name)
-        {
-            // Format the client name as Title Case
-            if (!string.IsNullOrEmpty(name))
-            {
-                string[] words = name.Split(' ');
-                for (int i = 0; i < words.Length; i++)
-                {
-                    if (!string.IsNullOrEmpty(words[i]))
-                    {
-                        words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
-                    }
-                }
-                return string.Join(" ", words);
-            }
-            return name;
-        }
+		private string FormatClientName(string name)
+		{
+			// Check if the provided name is not null or empty
+			if (!string.IsNullOrEmpty(name))
+			{
+				// Split the name into an array of words using space as a delimiter
+				string[] words = name.Split(' ');
+				// Iterate through each word in the array
+				for (int i = 0; i < words.Length; i++)
+				{
+					// Check if the word is not null or empty
+					if (!string.IsNullOrEmpty(words[i]))
+					{
+						// Convert the first character of the word to uppercase and the rest to lowercase
+						words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+					}
+				}
+				// Join the modified words back into a string separated by spaces and return it as Title Case
+				return string.Join(" ", words);
+			}
+			// If the provided name is empty or null, return it as is
+			return name;
+		}
 
-        public Drone(string name, string drone, string problem, double cost)
+		public Drone(string name, string drone, string problem, double cost)
         {
             // Assign the provided values to the corresponding fields of the Information object.
             this.clientName = name;

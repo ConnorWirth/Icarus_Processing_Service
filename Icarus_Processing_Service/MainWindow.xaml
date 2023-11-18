@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Icarus_Processing_Service"
         xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Icarus Processing Service" Height="520" Width="730" ResizeMode="CanMinimize">
+        Title="Icarus Processing Service" Height="550" Width="730" ResizeMode="CanMinimize">
     <Grid RenderTransformOrigin="0.442,0.477">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15*"/>
@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="90,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" x:Name="textBoxDrone" FontSize="10" Height="20"/>
         <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="90,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" x:Name="textBoxClient" FontSize="10" Height="20"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="90,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" x:Name="textBoxCost" FontSize="10" Height="20"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="90,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" x:Name="textBoxCost" FontSize="10" Height="20" PreviewTextInput="TextBoxServiceCost_PreviewTextInput"/>
         <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="90,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" x:Name="textBoxProblem" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" FontSize="10" Height="40"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,27,0,0" TextWrapping="Wrap" Text="Drone Model" VerticalAlignment="Top" FontSize="10"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="0,58,0,0" TextWrapping="Wrap" Text="Client Name" VerticalAlignment="Top" FontSize="10"/>
@@ -29,8 +29,8 @@
         <Button Grid.Column="1" Content="Add Service Item" HorizontalAlignment="Left" Margin="90,240,0,0" VerticalAlignment="Top" Width="150" Height="20" FontSize="10" x:Name="buttonAdd" Click="buttonAdd_Click"/>
         <StatusBar Margin="0,464,0,0" Grid.ColumnSpan="2" Height="20" x:Name="statusStrip1"/>
         <TextBlock HorizontalAlignment="Left" Margin="30,287,0,0" TextWrapping="Wrap" Text="Finished Services" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="3"/>
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,305,0,0" FontSize="10" Height="130" Width="290" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" x:Name="listBoxServices"/>
-        <ListView Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="355,43,0,0" Width="300" x:Name="listViewRegular" Height="140" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10">
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,305,0,0" FontSize="10" Height="130" Width="290" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" x:Name="listBoxServices" MouseDoubleClick="ListViewFinished_MouseDoubleClick"/>
+        <ListView Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="355,43,0,0" Width="300" x:Name="listViewRegular" Height="140" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" SelectionChanged="listViewRegular_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Model" DisplayMemberBinding="{Binding regularModel}" Width="58"/>
@@ -41,7 +41,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="355,257,0,0" Width="300" x:Name="listViewExpress" Height="140" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10">
+        <ListView Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="355,257,0,0" Width="300" x:Name="listViewExpress" Height="140" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" SelectionChanged="listViewExpress_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Model" DisplayMemberBinding="{Binding expressModel}" Width="58"/>
@@ -54,7 +54,7 @@
         </ListView>
         <TextBlock HorizontalAlignment="Left" Margin="355,25,0,0" TextWrapping="Wrap" Text="Regular Services" VerticalAlignment="Top" FontSize="10" Grid.Column="1"/>
         <TextBlock HorizontalAlignment="Left" Margin="355,239,0,0" TextWrapping="Wrap" Text="Express Services" VerticalAlignment="Top" FontSize="10" Grid.Column="1"/>
-        <Button Grid.Column="1" Content="Remove Service Item" HorizontalAlignment="Left" Margin="430,200,0,0" VerticalAlignment="Top" Width="150" Height="20" FontSize="10" x:Name="buttonRemoveRegular"/>
-        <Button Grid.Column="1" Content="Remove Service Item" HorizontalAlignment="Left" Margin="430,415,0,0" VerticalAlignment="Top" Width="150" Height="20" FontSize="10" x:Name="buttonRemoveExpress"/>
+        <Button Grid.Column="1" Content="Remove Service Item" HorizontalAlignment="Left" Margin="430,200,0,0" VerticalAlignment="Top" Width="150" Height="20" FontSize="10" x:Name="buttonRemoveRegular" Click="RemoveRegularServiceItem_Click"/>
+        <Button Grid.Column="1" Content="Remove Service Item" HorizontalAlignment="Left" Margin="430,415,0,0" VerticalAlignment="Top" Width="150" Height="20" FontSize="10" x:Name="buttonRemoveExpress" Click="RemoveExpressServiceItem_Click"/>
     </Grid>
 </Window>

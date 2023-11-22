@@ -107,15 +107,6 @@ namespace Icarus_Processing_Service
 			return name;
 		}
 
-		public Drone(string name, string drone, string problem, double cost)
-        {
-            // Assign the provided values to the corresponding fields of the Information object.
-            this.clientName = name;
-            this.droneModel = drone;
-            this.serviceProblem = problem;
-            this.serviceCost = cost;
-        }
-
         public Drone() { }
     }
 }
